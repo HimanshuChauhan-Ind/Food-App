@@ -20,7 +20,7 @@ const Header = () => {
             Offers
           </li>
           <li className="text-[#3d4152] hover:text-[#fc8019] hover:cursor-pointer">
-            <i class="fa-regular fa-life-ring mr-2"></i> Help
+            <i className="fa-regular fa-life-ring mr-2"></i> Help
           </li>
           <li className="text-[#3d4152] hover:text-[#fc8019] hover:cursor-pointer">
             <i className="fa-regular fa-user mr-2"></i> Sign In
