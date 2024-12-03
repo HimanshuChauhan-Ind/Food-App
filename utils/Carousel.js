@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { IMG_ADD } from "./constants";
 
-const Carousel = () => {
+const Carousel = ({ data }) => {
   const scrollObj = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -10,7 +11,6 @@ const Carousel = () => {
     setAtStart(obj.scrollLeft <= 0);
     setAtEnd(obj.scrollLeft + obj.clientWidth >= obj.scrollWidth);
   };
-
   useEffect(() => {
     const obj = scrollObj.current;
     obj.addEventListener("scroll", updateScrollState);
@@ -29,7 +29,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="dishes mx-40 py-4 ">
+    <div className="dishes ">
       <div className="upper flex justify-between">
         <div className="font-bold">
           <h2>What's on your mind?</h2>
@@ -52,39 +52,14 @@ const Carousel = () => {
         </div>
       </div>
       <div ref={scrollObj} className="flex overflow-hidden space-x-4 mt-4">
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 1
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 2
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 3
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 4
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 5
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 6
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 7
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 8
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 9
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 10
-        </div>
-        <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
-          Item 11
-        </div>
+        {data.map(({ id, imageId }) => (
+          <div key={id}>
+            <img
+              className="min-w-[144px] h-[180px]"
+              src={IMG_ADD + imageId}
+            ></img>
+          </div>
+        ))}
       </div>
     </div>
   );

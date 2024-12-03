@@ -1,7 +1,6 @@
 import { icon } from "./constants";
 
 const Header = () => {
-  console.log(icon);
   return (
     <div className="navbar shadow-lg h-20 flex justify-between items-center px-24 font-medium">
       <div className="navLogo p-x-10">
