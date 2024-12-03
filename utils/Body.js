@@ -1,11 +1,11 @@
 import Header from "./Header";
-import Topcarousal from "./Topcarousal";
+import Carousel from "./Carousel";
 
 const Body = () => {
   return (
     <div className="body font-proxima">
       <Header />
-      <Topcarousal />
+      <Carousel />
     </div>
   );
 };

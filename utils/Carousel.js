@@ -1,23 +1,31 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const Topcarousal = () => {
+const Carousel = () => {
   const scrollObj = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
 
+  const updateScrollState = () => {
+    const obj = scrollObj.current;
+    setAtStart(obj.scrollLeft <= 0);
+    setAtEnd(obj.scrollLeft + obj.clientWidth >= obj.scrollWidth);
+  };
+
+  useEffect(() => {
+    const obj = scrollObj.current;
+    obj.addEventListener("scroll", updateScrollState);
+    return () => {
+      obj.removeEventListener("scroll", updateScrollState);
+    };
+  }, []);
+
   const scrollleftClicked = () => {
     const obj = scrollObj.current;
     obj.scrollBy({ left: -200, behavior: "smooth" });
-    setAtEnd(false);
-    console.log(obj.scrollLeft);
-    obj.scrollLeft <= 220 ? setAtStart(true) : setAtStart(false);
   };
   const scrollRightClicked = () => {
     const obj = scrollObj.current;
     obj.scrollBy({ left: 200, behavior: "smooth" });
-    setAtStart(false);
-    console.log(obj.scrollWidth, obj.clientWidth - obj.scrollLeft);
-    obj.clientWidth - obj.scrollLeft < 200 ? setAtEnd(true) : setAtEnd(false);
   };
 
   return (
@@ -43,7 +51,7 @@ const Topcarousal = () => {
           </button>
         </div>
       </div>
-      <div ref={scrollObj} className="flex overflow-auto space-x-4 mt-4">
+      <div ref={scrollObj} className="flex overflow-hidden space-x-4 mt-4">
         <div className="min-w-[200px] h-[100px] bg-green-500 text-white flex items-center justify-center rounded-lg shadow-lg">
           Item 1
         </div>
@@ -82,4 +90,4 @@ const Topcarousal = () => {
   );
 };
 
-export default Topcarousal;
+export default Carousel;
