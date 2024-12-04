@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_ADD } from "./constants";
+import TextBox from "./TextBox";
 
-const Carousel = ({ data }) => {
+const Carousel = ({ data, title, textBody }) => {
   const scrollObj = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -32,7 +33,7 @@ const Carousel = ({ data }) => {
     <div className="dishes ">
       <div className="upper flex justify-between">
         <div className="font-bold">
-          <h2>What's on your mind?</h2>
+          <h2>{title}</h2>
         </div>
         <div className="buttons">
           <button className="scrollLeft" onClick={scrollleftClicked}>
@@ -52,14 +53,40 @@ const Carousel = ({ data }) => {
         </div>
       </div>
       <div ref={scrollObj} className="flex overflow-hidden space-x-4 mt-4">
-        {data.map(({ id, imageId }) => (
-          <div key={id}>
-            <img
-              className="min-w-[144px] h-[180px]"
-              src={IMG_ADD + imageId}
-            ></img>
-          </div>
-        ))}
+        {textBody
+          ? data.map((res) => (
+              <div
+                className="cursor-pointer min-w-[300px] h-[550px] hover:scale-95 transition-transform"
+                id={res.info.id}
+              >
+                <img
+                  className="rounded-2xl p-2 w-fit"
+                  src={IMG_ADD + res.info.cloudinaryImageId}
+                ></img>
+                <div className="info p-2">
+                  <div className="mt-2">
+                    <div className="resName m-2 font-bold">{res.info.name}</div>
+                    <i className=" rounded-full p-2 bg-green-600 text-white fa-solid fa-star"></i>
+                    <span className="ml-2">{res.info.avgRating} . </span>{" "}
+                    <span className="font-semibold">
+                      {res.info.sla.slaString}
+                    </span>
+                    <div className="cuisines m-2 w-max-[300px] whitespace-nowrap overflow-hidden overflow-ellipsis">
+                      {res.info.cuisines.join(",")}
+                    </div>
+                    <div className="area m-2">{res.info.areaName}</div>
+                  </div>
+                </div>
+              </div>
+            ))
+          : data.map(({ id, imageId }) => (
+              <div key={id}>
+                <img
+                  className="min-w-[144px] h-[180px]"
+                  src={IMG_ADD + imageId}
+                ></img>
+              </div>
+            ))}
       </div>
     </div>
   );

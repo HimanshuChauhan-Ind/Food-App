@@ -2,18 +2,22 @@ import Header from "./Header";
 import Carousel from "./Carousel";
 import Line from "./Line";
 import { useEffect, useState } from "react";
+import { ENTRY_API } from "./constants";
 
 const Body = () => {
   const [carouselData, setCarouselData] = useState(null);
-
+  const [topRestaurant, setTopRestaurant] = useState(null);
   const completeData = async () => {
-    const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6870522&lng=77.4856126&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const response = await fetch(ENTRY_API);
     const data = await response.json();
     setCarouselData(data);
     const cardData = data?.data?.cards[0]?.card?.card?.imageGridCards?.info;
+    const topRestaurantData =
+      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     setCarouselData(cardData);
+    setTopRestaurant(topRestaurantData);
+    console.log(topRestaurantData);
   };
 
   useEffect(() => {
@@ -24,7 +28,17 @@ const Body = () => {
     <div className="app font-proxima">
       <Header />
       <div className="body mx-40 py-4 ">
-        {carouselData !== null && <Carousel data={carouselData} />}
+        {carouselData !== null && (
+          <Carousel title={"What's on your mind?"} data={carouselData} />
+        )}
+        <Line></Line>
+        {topRestaurant !== null && (
+          <Carousel
+            title={"Top restaurant chains in Noida"}
+            data={topRestaurant}
+            textBody={true}
+          />
+        )}
         <Line></Line>
       </div>
     </div>
