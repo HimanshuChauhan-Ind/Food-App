@@ -71,7 +71,7 @@ const Carousel = ({ data, title, textBody }) => {
                     <span className="font-semibold">
                       {res.info.sla.slaString}
                     </span>
-                    <div className="cuisines m-2 w-max-[300px] whitespace-nowrap overflow-hidden overflow-ellipsis">
+                    <div className="cuisines m-2 w-max-[300px] truncate">
                       {res.info.cuisines.join(",")}
                     </div>
                     <div className="area m-2">{res.info.areaName}</div>
