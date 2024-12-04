@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_ADD } from "./constants";
-import TextBox from "./TextBox";
 
 const Carousel = ({ data, title, textBody }) => {
   const scrollObj = useRef(null);

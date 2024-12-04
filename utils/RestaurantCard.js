@@ -2,7 +2,7 @@ import { IMG_ADD } from "./constants";
 
 const RestaurantCard = ({ data }) => {
   return (
-    <div className="restaurantCard w-72">
+    <div className="restaurantCard w-80 hover:scale-95 transition-transform cursor-pointer">
       <div className="cardImage">
         <img
           className="rounded-2xl p-2 h-52 w-full object-cover"
