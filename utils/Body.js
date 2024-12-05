@@ -1,4 +1,3 @@
-import Header from "./Header";
 import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantList from "./RestaurantList";
@@ -9,6 +8,7 @@ const Body = () => {
   const [carouselData, setCarouselData] = useState(null);
   const [topRestaurant, setTopRestaurant] = useState(null);
   const [restaurantList, setRestaurantList] = useState(null);
+
   const completeData = async () => {
     const response = await fetch(ENTRY_API);
     const data = await response.json();
@@ -32,7 +32,6 @@ const Body = () => {
 
   return (
     <div className="app font-proxima">
-      <Header />
       <div className="body mx-40 py-4 ">
         {carouselData !== null && (
           <Carousel title={"What's on your mind?"} data={carouselData} />

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_ADD } from "./constants";
 
-const Carousel = ({ data, title, textBody }) => {
+const Carousel = ({ data, title, textBody, offerCard }) => {
   const scrollObj = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -55,6 +55,7 @@ const Carousel = ({ data, title, textBody }) => {
         {textBody
           ? data.map((res) => (
               <div
+                key={res.info.id}
                 className="cursor-pointer min-w-[300px] h-[550px] hover:scale-95 transition-transform"
                 id={res.info.id}
               >
@@ -74,6 +75,17 @@ const Carousel = ({ data, title, textBody }) => {
                       {res.info.cuisines.join(",")}
                     </div>
                     <div className="area m-2">{res.info.areaName}</div>
+                  </div>
+                </div>
+              </div>
+            ))
+          : offerCard
+          ? data.map(({ info, index }) => (
+              <div className="min-w-80 border rounded-xl p-4" key={index}>
+                <div>
+                  <div className="offerHeader font-bold">{info.header}</div>
+                  <div className="offerDescription truncate text-sm text-gray-500 font-bold">
+                    {info.description}
                   </div>
                 </div>
               </div>
