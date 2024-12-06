@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_ADD } from "./constants";
 
-const Carousel = ({ data, title, textBody, offerCard }) => {
+const Carousel = ({ data, title, textBody, offerCard, topPicks }) => {
   const scrollObj = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -88,6 +88,28 @@ const Carousel = ({ data, title, textBody, offerCard }) => {
                     {info.description}
                   </div>
                 </div>
+              </div>
+            ))
+          : topPicks
+          ? data.map((dish) => (
+              <div
+                key={dish.dish.info.id}
+                className="min-w-60 border rounded-2xl min-h-60 relative"
+              >
+                <img
+                  className="rounded-2xl w-full h-full object-cover"
+                  src={IMG_ADD + dish.dish.info.imageId}
+                ></img>
+                <div className="dishName absolute top-4 left-2 text-white">
+                  {dish.dish.info.name}
+                </div>
+                <div className="price bottom-4 left-2 text-white absolute">
+                  ₹{" "}
+                  {(dish.dish.info.price || dish.dish.info.defaultPrice) / 100}
+                </div>
+                <button className="absolute bg-white text-green-500 bottom-4 right-2 py-2 px-8 font-bold cursor-pointer rounded-lg">
+                  ADD
+                </button>
               </div>
             ))
           : data.map(({ id, imageId }) => (

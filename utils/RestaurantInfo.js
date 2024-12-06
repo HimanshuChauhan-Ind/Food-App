@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { MENU_API } from "./constants";
 import Carousel from "./Carousel";
+import Line from "./Line";
 
 const RestaurantInfo = () => {
   const { resId } = useParams();
@@ -21,6 +22,10 @@ const RestaurantInfo = () => {
   const offersData =
     restautantData?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
       ?.offers;
+  const topPicks =
+    restautantData?.data?.cards[4]?.groupedCard?.cardGroupMap.REGULAR.cards[1]
+      ?.card?.card?.carousel;
+  console.log(topPicks);
   return (
     restaurantInfo && (
       <div className="restaurantInfo mx-64 py-4">
@@ -79,6 +84,14 @@ const RestaurantInfo = () => {
             data={offersData}
           />
         </div>
+        <div className="text-center mt-11 text-sm text-gray-500 tracking-widest">
+          MENU
+        </div>
+        <div className="text-center mt-4 bg-gray-300 p-4 rounded-lg text-gray-600 text-sm">
+          Search for dishes
+        </div>
+        <Line />
+        {topPicks && <Carousel data={topPicks} topPicks={true} />}
       </div>
     )
     // <div>Test</div>

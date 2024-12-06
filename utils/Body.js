@@ -23,7 +23,6 @@ const Body = () => {
     setCarouselData(cardData);
     setTopRestaurant(topRestaurantData);
     setRestaurantList(activeRestaurantList);
-    console.log(activeRestaurantList);
   };
 
   useEffect(() => {
