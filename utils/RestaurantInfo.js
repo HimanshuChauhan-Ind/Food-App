@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { MENU_API } from "./constants";
 import Carousel from "./Carousel";
 import Line from "./Line";
+import RestaurantCollapsableMenu from "./RestaurantColllapsableMenu.";
 
 const RestaurantInfo = () => {
   const { resId } = useParams();
@@ -28,7 +29,7 @@ const RestaurantInfo = () => {
   console.log(topPicks);
   return (
     restaurantInfo && (
-      <div className="restaurantInfo mx-64 py-4">
+      <div className="restaurantInfo m-auto py-4 w-3/4 2xl:w-1/2 text-center">
         <div className="restaurantName font-bold text-2xl">
           {restaurantInfo.name}
         </div>
@@ -92,6 +93,9 @@ const RestaurantInfo = () => {
         </div>
         <Line />
         {topPicks && <Carousel data={topPicks} topPicks={true} />}
+        <div className="dishesFilterList mt-11">
+          <RestaurantCollapsableMenu />
+        </div>
       </div>
     )
     // <div>Test</div>

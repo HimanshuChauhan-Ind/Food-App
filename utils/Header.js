@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 const Header = () => {
   return (
     <div className="app">
-      <div className="navbar shadow-lg h-20 flex justify-between items-center px-24 font-medium">
+      <div className="navbar shadow-lg h-20 flex justify-center items-center px-24 font-medium gap-x-60">
         <div className="navLogo p-x-10">
           <Link to="/">
             <img className="h-14" src={icon}></img>
