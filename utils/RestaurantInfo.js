@@ -4,6 +4,7 @@ import { MENU_API } from "./constants";
 import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantCollapsableMenu from "./RestaurantColllapsableMenu.";
+import RestaurantCollapsableMenuNested from "./RestaurantCollapsabelMenuNested";
 
 const RestaurantInfo = () => {
   const { resId } = useParams();
@@ -33,6 +34,16 @@ const RestaurantInfo = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.MenuCarousel"
     );
   topPicks = topPicks && topPicks[0]?.card?.card?.carousel;
+
+  let menuCard =
+    completeMenuList?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (type) =>
+        type.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ||
+        type.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+    );
+
   return (
     restaurantInfo && (
       <div className="restaurantInfo m-auto py-4 w-3/4 2xl:w-1/2 text-center">
@@ -100,11 +111,24 @@ const RestaurantInfo = () => {
         <Line />
         {topPicks && <Carousel data={topPicks} topPicks={true} />}
         <div className="dishesFilterList mt-11">
-          <RestaurantCollapsableMenu />
+          {menuCard &&
+            menuCard.map((item) =>
+              item.card.card["@type"] ===
+              "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ? (
+                <RestaurantCollapsableMenu
+                  key={item.card.card.type}
+                  data={item}
+                />
+              ) : (
+                <RestaurantCollapsableMenuNested
+                  key={item.card.card.type}
+                  data={item}
+                />
+              )
+            )}
         </div>
       </div>
     )
-    // <div>Test</div>
   );
 };
 
