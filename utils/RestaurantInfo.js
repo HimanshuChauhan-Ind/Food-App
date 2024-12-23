@@ -23,10 +23,16 @@ const RestaurantInfo = () => {
   const offersData =
     restautantData?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
       ?.offers;
-  const topPicks =
-    restautantData?.data?.cards[4]?.groupedCard?.cardGroupMap.REGULAR.cards[1]
-      ?.card?.card?.carousel;
-  console.log(topPicks);
+
+  const completeMenuList = restautantData?.data?.cards.at(-1);
+
+  let topPicks =
+    completeMenuList?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (type) =>
+        type.card.card["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.MenuCarousel"
+    );
+  topPicks = topPicks && topPicks[0]?.card?.card?.carousel;
   return (
     restaurantInfo && (
       <div className="restaurantInfo m-auto py-4 w-3/4 2xl:w-1/2 text-center">
