@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IMG_ADD } from "./constants";
+import { IMG_ADD } from "../utils/constants";
 
 const Carousel = ({ data, title, textBody, offerCard, topPicks }) => {
   const scrollObj = useRef(null);

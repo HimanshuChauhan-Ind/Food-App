@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { MENU_API } from "./constants";
+import { MENU_API } from "../utils/constants";
 import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantCollapsableMenu from "./RestaurantColllapsableMenu.";

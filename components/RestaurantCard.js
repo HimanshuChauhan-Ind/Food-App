@@ -1,4 +1,4 @@
-import { IMG_ADD } from "./constants";
+import { IMG_ADD } from "../utils/constants";
 
 const RestaurantCard = ({ data }) => {
   return (

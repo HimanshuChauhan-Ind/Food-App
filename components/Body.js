@@ -2,7 +2,7 @@ import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantList from "./RestaurantList";
 import { useEffect, useState } from "react";
-import { ENTRY_API } from "./constants";
+import { ENTRY_API } from "../utils/constants";
 
 const Body = () => {
   const [carouselData, setCarouselData] = useState(null);

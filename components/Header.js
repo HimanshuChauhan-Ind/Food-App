@@ -1,4 +1,4 @@
-import { icon } from "./constants";
+import { icon } from "../utils/constants";
 import { Link } from "react-router";
 import { Outlet } from "react-router";
 
