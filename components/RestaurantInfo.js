@@ -1,31 +1,20 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { MENU_API } from "../utils/constants";
 import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantCollapsableMenu from "./RestaurantColllapsableMenu.";
 import RestaurantCollapsableMenuNested from "./RestaurantCollapsabelMenuNested";
+import useGetRestaurantData from "../utils/useGetRestaurantData";
 
 const RestaurantInfo = () => {
   const { resId } = useParams();
-  const [restautantData, setREstaurantData] = useState(null);
+  const restaurantData = useGetRestaurantData(resId);
 
-  const getData = async () => {
-    const response = await fetch(MENU_API + resId);
-    const data = await response.json();
-    setREstaurantData(data);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const restaurantInfo = restautantData?.data?.cards[2]?.card?.card?.info;
+  const restaurantInfo = restaurantData?.data?.cards[2]?.card?.card?.info;
   const offersData =
-    restautantData?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+    restaurantData?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
       ?.offers;
 
-  const completeMenuList = restautantData?.data?.cards.at(-1);
+  const completeMenuList = restaurantData?.data?.cards.at(-1);
 
   let topPicks =
     completeMenuList?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
