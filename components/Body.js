@@ -1,8 +1,6 @@
 import Carousel from "./Carousel";
 import Line from "./Line";
 import RestaurantList from "./RestaurantList";
-import { useEffect, useState } from "react";
-import { ENTRY_API } from "../utils/constants";
 import useCompleteData from "../utils/useCompleteData";
 
 const Body = () => {

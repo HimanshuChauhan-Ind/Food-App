@@ -2,11 +2,13 @@ import { createRoot } from "react-dom/client";
 import Header from "./Header";
 import Body from "./Body";
 import { BrowserRouter, Routes, Route } from "react-router";
-import Help from "./Help";
 import RestaurantInfo from "./RestaurantInfo";
+import { lazy } from "react";
 
 const app = document.getElementById("app");
 const root = createRoot(app);
+
+const Help = lazy(() => import("./Help"));
 
 root.render(
   <BrowserRouter>

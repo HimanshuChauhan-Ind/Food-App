@@ -2,24 +2,15 @@ import { useState } from "react";
 import { DISH_IMG } from "../utils/constants";
 import Line from "./Line";
 
-// console.log(DISH_IMG);
-
-const RestaurantCollapsableMenu = ({ data }) => {
+const RestaurantCollapsableMenu = ({ data, isCollapsed, isFocused }) => {
   const { card } = data.card;
   const { itemCards } = card;
-  console.log("Item Card", card);
-  console.log("Item Cards", itemCards);
-
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const toggleCollapse = () => {
-    setIsCollapsed((prev) => !prev);
-  };
 
   return (
     <div className="text-left border-b-8 p-2">
       <div
         className="categotyInfo flex justify-between py-10 cursor-pointer"
-        onClick={toggleCollapse}
+        onClick={isFocused}
       >
         <div className="category">{card.title}</div>
         <div className="arrow">

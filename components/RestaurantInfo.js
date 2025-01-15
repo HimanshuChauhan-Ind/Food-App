@@ -4,8 +4,10 @@ import Line from "./Line";
 import RestaurantCollapsableMenu from "./RestaurantColllapsableMenu.";
 import RestaurantCollapsableMenuNested from "./RestaurantCollapsabelMenuNested";
 import useGetRestaurantData from "../utils/useGetRestaurantData";
+import { useState } from "react";
 
 const RestaurantInfo = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const { resId } = useParams();
   const restaurantData = useGetRestaurantData(resId);
 
@@ -101,12 +103,16 @@ const RestaurantInfo = () => {
         {topPicks && <Carousel data={topPicks} topPicks={true} />}
         <div className="dishesFilterList mt-11">
           {menuCard &&
-            menuCard.map((item) =>
+            menuCard.map((item, index) =>
               item.card.card["@type"] ===
               "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" ? (
                 <RestaurantCollapsableMenu
                   key={item.card.card.type}
                   data={item}
+                  isCollapsed={currentIndex === index ? false : true}
+                  isFocused={() =>
+                    setCurrentIndex((prev) => (prev === index ? null : index))
+                  }
                 />
               ) : (
                 <RestaurantCollapsableMenuNested
