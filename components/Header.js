@@ -1,8 +1,11 @@
 import { icon } from "../utils/constants";
 import { Link } from "react-router";
 import { Outlet } from "react-router";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <div className="app">
       <div className="navbar shadow-lg h-20 flex justify-center items-center px-24 font-medium gap-x-60">
@@ -32,7 +35,8 @@ const Header = () => {
               <i className="fa-regular fa-user mr-2"></i> Sign In
             </li>
             <li className="text-[#3d4152] hover:text-[#fc8019] hover:cursor-pointer">
-              <i className="fa-solid fa-cart-shopping mr-2"></i> Cart
+              <i className="fa-solid fa-cart-shopping mr-2"></i> Cart{" "}
+              {cartItems.length} items
             </li>
           </ul>
         </div>
