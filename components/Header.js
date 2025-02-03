@@ -35,8 +35,10 @@ const Header = () => {
               <i className="fa-regular fa-user mr-2"></i> Sign In
             </li>
             <li className="text-[#3d4152] hover:text-[#fc8019] hover:cursor-pointer">
-              <i className="fa-solid fa-cart-shopping mr-2"></i> Cart{" "}
-              {cartItems.length} items
+              <Link to="/cart">
+                <i className="fa-solid fa-cart-shopping mr-2"></i> Cart{" "}
+                {cartItems.length} items
+              </Link>
             </li>
           </ul>
         </div>

@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { DISH_IMG } from "../utils/constants";
 import Line from "./Line";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantCollapsableMenu = ({ data, isCollapsed, isFocused }) => {
   const { card } = data.card;
   const { itemCards } = card;
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="text-left border-b-8 p-2">
@@ -46,7 +54,10 @@ const RestaurantCollapsableMenu = ({ data, isCollapsed, isFocused }) => {
                     src={DISH_IMG + item.card.info.imageId}
                   ></img>
                   <div className="btn absolute top-40 w-full text-center">
-                    <button className="bg-white border-solid border-[1px] border-gray-300 hover:bg-slate-300 px-5 py-1 rounded-md font-bold text-green-600">
+                    <button
+                      className="bg-white border-solid border-[1px] border-gray-300 hover:bg-slate-300 px-5 py-1 rounded-md font-bold text-green-600"
+                      onClick={() => handleAddItem(item)}
+                    >
                       ADD
                     </button>
                   </div>
